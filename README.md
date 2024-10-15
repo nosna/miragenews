@@ -24,11 +24,11 @@ We will release three detectors for different modalities: **MiRAGe-Img** for Ima
 Our detectors are more robust on out-of-domain (OOD) data from unseen news publishers and image generators than SOTA MLLMs and detectors.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/cac9691f-5ba5-4351-b1d9-a2ac679435b7" width="505" />
-  <img src="https://github.com/user-attachments/assets/778ef402-dbac-4b0c-a060-3fabaa6f15f3" width="495" /> 
+  <img src="https://github.com/user-attachments/assets/cac9691f-5ba5-4351-b1d9-a2ac679435b7" width="50%" />
+  <img src="https://github.com/user-attachments/assets/778ef402-dbac-4b0c-a060-3fabaa6f15f3" width="49%" /> 
 </p>
 
-<img width="1361" alt="Screenshot 2024-10-15 at 5 57 53 AM" src="https://github.com/user-attachments/assets/eb4cea74-7210-4ae8-a58d-a2119dca3ab2">
+<img width="100%" alt="Screenshot 2024-10-15 at 5 57 53 AM" src="https://github.com/user-attachments/assets/eb4cea74-7210-4ae8-a58d-a2119dca3ab2">
 
 
 ## Acknowledgement
