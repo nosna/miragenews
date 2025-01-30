@@ -1,0 +1,59 @@
+model:
+  name: "mirage-img"
+
+training:
+  epochs: 100
+  batch_size: 64
+  learning_rate: 0.001
+  save_path: "checkpoints/image/mirage-img.pt"
+
+train_dataset:
+  name: "img-or-text"
+  params:
+    real_pt: "encodings/predictions/image/merged/train/real.pt"
+    fake_pt: "encodings/predictions/image/merged/train/fake.pt"
+
+val_dataset:
+  name: "img-or-text"
+  params:
+    real_pt: "encodings/predictions/image/merged/validation/real.pt"
+    fake_pt: "encodings/predictions/image/merged/validation/fake.pt"
+
+test1_dataset:
+  name: "img-or-text"
+  test_name: "test1_nyt_mj"
+  params:
+    real_pt: "encodings/predictions/image/merged/test1_nyt_mj/real.pt"
+    fake_pt: "encodings/predictions/image/merged/test1_nyt_mj/fake.pt"
+
+test2_dataset:
+  name: "img-or-text"
+  test_name: "test2_bbc_dalle"
+  params:
+    real_pt: "encodings/predictions/image/merged/test2_bbc_dalle/real.pt"
+    fake_pt: "encodings/predictions/image/merged/test2_bbc_dalle/fake.pt"
+
+test3_dataset:
+  name: "img-or-text"
+  test_name: "test3_cnn_dalle"
+  params:
+    real_pt: "encodings/predictions/image/merged/test3_cnn_dalle/real.pt"
+    fake_pt: "encodings/predictions/image/merged/test3_cnn_dalle/fake.pt"
+
+test4_dataset:
+  name: "img-or-text"
+  test_name: "test4_bbc_sdxl"
+  params:
+    real_pt: "encodings/predictions/image/merged/test4_bbc_sdxl/real.pt"
+    fake_pt: "encodings/predictions/image/merged/test4_bbc_sdxl/fake.pt"
+
+test5_dataset:
+  name: "img-or-text"
+  test_name: "test5_cnn_sdxl"
+  params:
+    real_pt: "encodings/predictions/image/merged/test5_cnn_sdxl/real.pt"
+    fake_pt: "encodings/predictions/image/merged/test5_cnn_sdxl/fake.pt"
+
+testing:
+  batch_size: 64
+  save_path: "results/image/mirage-img.jsonl"

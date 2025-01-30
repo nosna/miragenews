@@ -1,0 +1,74 @@
+model:
+  name: "mirage"
+
+training:
+  epochs: 100
+  batch_size: 64
+  learning_rate: 0.001
+  image_model_path: "checkpoints/image/best-mirage-img.pt"
+  text_model_path: "checkpoints/text/best-mirage-txt.pt"
+
+train_dataset:
+  name: "multimodal"
+  params:
+    real_img_pt: "encodings/predictions/image/merged/train/real.pt"
+    fake_img_pt: "encodings/predictions/image/merged/train/fake.pt"
+    real_text_pt: "encodings/predictions/text/merged/train/real.pt"
+    fake_text_pt: "encodings/predictions/text/merged/train/fake.pt"
+
+val_dataset:
+  name: "multimodal"
+  params:
+    real_img_pt: "encodings/predictions/image/merged/validation/real.pt"
+    fake_img_pt: "encodings/predictions/image/merged/validation/fake.pt"
+    real_text_pt: "encodings/predictions/text/merged/validation/real.pt"
+    fake_text_pt: "encodings/predictions/text/merged/validation/fake.pt"
+
+test1_dataset:
+  name: "multimodal"
+  test_name: "test1_nyt_mj"
+  params:
+    real_img_pt: "encodings/predictions/image/merged/test1_nyt_mj/real.pt"
+    fake_img_pt: "encodings/predictions/image/merged/test1_nyt_mj/fake.pt"
+    real_text_pt: "encodings/predictions/text/merged/test1_nyt_mj/real.pt"
+    fake_text_pt: "encodings/predictions/text/merged/test1_nyt_mj/fake.pt"
+
+test2_dataset:
+  name: "multimodal"
+  test_name: "test2_bbc_dalle"
+  params:
+    real_img_pt: "encodings/predictions/image/merged/test2_bbc_dalle/real.pt"
+    fake_img_pt: "encodings/predictions/image/merged/test2_bbc_dalle/fake.pt"
+    real_text_pt: "encodings/predictions/text/merged/test2_bbc_dalle/real.pt"
+    fake_text_pt: "encodings/predictions/text/merged/test2_bbc_dalle/fake.pt"
+
+test3_dataset:
+  name: "multimodal"
+  test_name: "test3_cnn_dalle"
+  params:
+    real_img_pt: "encodings/predictions/image/merged/test3_cnn_dalle/real.pt"
+    fake_img_pt: "encodings/predictions/image/merged/test3_cnn_dalle/fake.pt"
+    real_text_pt: "encodings/predictions/text/merged/test3_cnn_dalle/real.pt"
+    fake_text_pt: "encodings/predictions/text/merged/test3_cnn_dalle/fake.pt"
+
+test4_dataset:
+  name: "multimodal"
+  test_name: "test4_bbc_sdxl"
+  params:
+    real_img_pt: "encodings/predictions/image/merged/test4_bbc_sdxl/real.pt"
+    fake_img_pt: "encodings/predictions/image/merged/test4_bbc_sdxl/fake.pt"
+    real_text_pt: "encodings/predictions/text/merged/test4_bbc_sdxl/real.pt"
+    fake_text_pt: "encodings/predictions/text/merged/test4_bbc_sdxl/fake.pt"
+
+test5_dataset:
+  name: "multimodal"
+  test_name: "test5_cnn_sdxl"
+  params:
+    real_img_pt: "encodings/predictions/image/merged/test5_cnn_sdxl/real.pt"
+    fake_img_pt: "encodings/predictions/image/merged/test5_cnn_sdxl/fake.pt"
+    real_text_pt: "encodings/predictions/text/merged/test5_cnn_sdxl/real.pt"
+    fake_text_pt: "encodings/predictions/text/merged/test5_cnn_sdxl/fake.pt"
+
+testing:
+  batch_size: 64
+  save_path: "results/multimodal/mirage.jsonl"

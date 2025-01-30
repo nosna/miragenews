@@ -1,0 +1,8 @@
+model:
+  name: "cbm-encoder"
+
+training:
+  epochs: 100
+  batch_size: 64
+  learning_rate: 0.001
+  save_path: "checkpoints/image/cbm-encoder.pt"
