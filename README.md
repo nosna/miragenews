@@ -28,8 +28,82 @@ from datasets import load_dataset
 dataset = load_dataset("anson-huang/mirage-news")
 ```
 
+To train ***MiRAGe*** detectors on the ***MiRAGeNews*** dataset, we need to first encode both images and text from the dataset:
+
+```
+$ python data/encode_image.py
+$ python data/encode_crops.py
+$ python data/encode_text.py
+```
+You can use the ```--custom``` and ```--read_dirs``` flags if you want to encode other datasets.
+
 ## MiRAGe Detectors
-We will release three detectors for different modalities: **MiRAGe-Img** for Image-only Detection, **MiRAGe-Txt** for Text-only Detection, and **MiRAGe** for Multimodal Detection. Pretrained models and code will be available soon.
+There are three detectors: **MiRAGe-Img** for Image-only Detection, **MiRAGe-Txt** for Text-only Detection, and **MiRAGe** for Multimodal Detection. The single-modal detectors are trained on predictions from a linear model and a concept bottleneck model(CBM). The multimodal detector directly inferences on the predictions from **MiRAGe-Img** and **MiRAGe-Txt** without further training. All of the pretrained checkpoints are in ```\checkpoints```
+
+
+### ***MiRAGe-Img***
+
+#### Training
+To train ***MiRAGe-Img***, we need to first train a linear model and a concept bottlenecks model(CBM) to get their predictions:
+```
+$ python train.py --mode image --model_class linear
+$ python train.py --mode image --model_class cbm-encoder
+$ python train.py --mode image --model_class cbm-predictor
+```
+Note that the CBM encoder encodes each image to a concept vector(D=300) based on its object-class crops and the CBM predictor outputs real/fake from the concept vectors.
+
+Then, we need to encode the predictions from the linear model and merge them with the concept vectors to obtain the D=301 vector before training ***MiRAGe-Img***.
+```
+$ python data/encode_predictions --mode image --model_class linear
+$ python data/encode_predictions --mode image --model_class merged
+$ python train.py --mode image --model_class mirage
+```
+
+#### Testing
+To test ***MiRAGe-Img***, run
+```
+$ python test.py --mode image --model_class mirage
+```
+Modify the ```--model_class``` for testing any subcomponents. The results of all five test sets would be saved in corresponding jsonl file in ```\results\image```
+
+<br>
+
+### ***MiRAGe-Txt***
+
+#### Training
+To train ***MiRAGe-Txt***, we need to first train a linear model:
+```
+$ python train.py --mode text --model_class linear
+```
+We provided the concept vectors(D=18) from text bottleneck model(TBM) in ```encodings/predictions/text/tbm-encoder``` since it requires access to OpenAI API. See details of TBM here.
+
+Optionally, you can train a TBM predictor only using the TBM concepts:
+```
+$ python train.py --mode text --model_class tbm-predictor
+```
+
+Then, we need to encode the predictions from the linear model and merge them with the concept vectors to obtain the D=19 vector before training ***MiRAGe-Txt***.
+```
+$ python data/encode_predictions --mode text --model_class linear
+$ python data/encode_predictions --mode text --model_class merged
+$ python train.py --mode text --model_class mirage
+```
+#### Testing
+To test ***MiRAGe-Txt***, run
+```
+$ python test.py --mode text --model_class mirage
+```
+Modify the ```--model_class``` for testing any subcomponents. The results of all five test sets would be saved in corresponding jsonl file in ```\results\text```
+
+<br>
+
+### ***MiRAGe***
+***MiRAGe*** detector uses trained ***MiRAGe-Img*** and ***MiRAGe-Txt*** and doesn't need further training. To test ***MiRAGe***, run:
+```
+$ python test.py --mode multimodal --model_class mirage
+```
+The results of all five test sets would be saved in corresponding jsonl file in ```\results\multimodal```
+
 
 Our detectors are more robust on out-of-domain (OOD) data from unseen news publishers and image generators than SOTA MLLMs and detectors.
 
