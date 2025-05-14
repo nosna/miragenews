@@ -1,4 +1,3 @@
-from .mirage import *
 from .mirage_img import *
 from .mirage_txt import *
 
@@ -17,8 +16,7 @@ def get_model(config):
         "mirage-img": MiRAGeImg,
         "txt-linear": TextLinearModel,
         "tbm-predictor": TBMPredictor,
-        "mirage-txt": MiRAGeTxt,
-        "mirage": MiRAGe
+        "mirage-txt": MiRAGeTxt
         # Add other models here as needed
     }
     
